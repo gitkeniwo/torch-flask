@@ -1,15 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template, current_app
 
 from app.models.model import transform_image, get_prediction, render_prediction
-
-from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET']) # this decorator maps the / route to the root() function
 def root():
+    'Try POSTing to the /predict endpoint with an RGB image attachment'
     
-    return jsonify({'msg' : 'Try POSTing to the /predict endpoint with an RGB image attachment'})
+    # serve a simple html page at templates/index.html
+    return current_app.send_static_file('index.html')
 
 
 @app.route('/predict', methods=['POST'])
